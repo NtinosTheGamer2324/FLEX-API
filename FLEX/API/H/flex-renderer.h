@@ -1,20 +1,25 @@
 #ifndef FLEX_RENDERER_H
 #define FLEX_RENDERER_H
 
-// Include necessary headers
-#include "FLEX-SYSTEM.h"
-#include "flexFAT.h"
+// Function to initialize the rendering system
+void renderer_init(void);
 
-// Function declarations for rendering
-void render_setbackimg(const char* img_path);
-void render_create_TEXTBOX(const char* placeholder);
-void render_create_BUTTON(const char* label);
-void render_update(void);
-void render_text(const char* text);
-void render_spacer(void);
+// Function to set the background image of the UI
+void renderer_set_background(const char* image_path);
 
-// Utility function to load images
-void* load_image(const char* path);
+// Function to create a text box for user input
+void* renderer_create_textbox(const char* placeholder);
+
+// Function to create a button
+void* renderer_create_button(const char* label);
+
+// Function to render the GUI
+void renderer_render(void);
+
+// Function to check if a button has been pressed
+int renderer_button_pressed(void* button);
+
+// Function to get the text from a textbox
+const char* renderer_get_text(void* textbox);
 
 #endif // FLEX_RENDERER_H
-
