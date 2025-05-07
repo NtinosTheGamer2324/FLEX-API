@@ -1,25 +1,25 @@
 #ifndef FLEX_RENDERER_H
 #define FLEX_RENDERER_H
 
-// Function to initialize the rendering system
+// Initialization function for the renderer
 void renderer_init(void);
 
-// Function to set the background image of the UI
+// Function to set a background image (for now, we simulate it)
 void renderer_set_background(const char* image_path);
 
-// Function to create a text box for user input
+// Function to create a textbox (returns a pointer to the textbox object)
 void* renderer_create_textbox(const char* placeholder);
 
-// Function to create a button
+// Function to create a button (returns a pointer to the button object)
 void* renderer_create_button(const char* label);
 
-// Function to render the GUI
+// Function to render the graphics on screen (simulating framebuffer write)
 void renderer_render(void);
 
-// Function to check if a button has been pressed
+// Function to check if a button was pressed (checks simulated event)
 int renderer_button_pressed(void* button);
 
-// Function to get the text from a textbox
+// Function to get text from a textbox (returns text entered by user)
 const char* renderer_get_text(void* textbox);
 
 #endif // FLEX_RENDERER_H
