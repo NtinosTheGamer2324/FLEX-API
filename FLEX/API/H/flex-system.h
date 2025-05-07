@@ -1,35 +1,27 @@
 #ifndef FLEX_SYSTEM_H
 #define FLEX_SYSTEM_H
 
-// Initialize core system components, including hardware drivers
+// System initialization and main functions
 void system_init(void);
-
-// Initialize hardware drivers (keyboard, mouse, audio)
-void system_init_hardware(void);
-
-// Start the system, running the main kernel process
 void system_start(void);
-
-// Halt the system
 void system_halt(void);
 
-// Restart the system
-void system_restart(void);
+// Hardware initialization and drivers
+void system_init_hardware(void);
 
-// Print system-level messages (debugging, logging)
-void system_print(const char* message);
+// Keyboard, Mouse, and Audio initialization
+void keyboard_init(void);
+void mouse_init(void);
+void audio_init(void);
 
-// Get the system uptime in ticks
-unsigned long system_uptime(void);
-
-// Keyboard input handling function (simplified)
+// Read inputs
 int keyboard_read(void);
-
-// Mouse input handling function (simplified)
 void mouse_read(int* x, int* y, int* button_status);
 
-// Audio driver initialization and control
-void audio_init(void);
+// Audio functions (simplified)
 void audio_play_sound(const char* sound_file);
+
+// Print message to the screen (system-dependent)
+void system_print(const char* message);
 
 #endif // FLEX_SYSTEM_H
