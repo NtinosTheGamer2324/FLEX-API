@@ -1,0 +1,19 @@
+#Execturables
+*.flexe
+*.app
+*.daap
+
+#Libraries
+*.dll
+*.fdll
+*.lib
+
+#DRIVER
+*.dvr-inst
+*.drv
+
+#DEBUG FLAGS FOR FLEXE
+--show-GCC-debug-terminal
+--show-G++-debug-terminal
+--show-power
+--win32-link
