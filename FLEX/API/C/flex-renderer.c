@@ -1,46 +1,80 @@
 #include "flex-renderer.h"
-#include "FLEX-SYSTEM.h"
-#include "flexFAT.h"
 
-// Function to set the background image
-void render_setbackimg(const char* img_path) {
-    void* image = load_image(img_path);  // Load the image
-    // Assuming there's some system function that actually sets the image as background
-    system_set_background(image);
+// Define a basic structure to simulate rendering objects (e.g., buttons, textboxes)
+typedef struct {
+    const char* label;
+    int pressed;
+} Button;
+
+typedef struct {
+    const char* placeholder;
+    const char* text;
+} Textbox;
+
+// Simulate a screen buffer where we store pixel data (this is a very simplified version)
+#define SCREEN_WIDTH 80
+#define SCREEN_HEIGHT 25
+char screen_buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
+
+// Function to initialize the rendering system (simply clears the screen buffer)
+void renderer_init(void) {
+    for (int i = 0; i < SCREEN_HEIGHT; i++) {
+        for (int j = 0; j < SCREEN_WIDTH; j++) {
+            screen_buffer[i][j] = ' ';
+        }
+    }
 }
 
-// Function to create a textbox (this is a mockup for now)
-void render_create_TEXTBOX(const char* placeholder) {
-    // Assuming we have a system function that creates a textbox on screen
-    system_create_textbox(placeholder);
+// Function to simulate setting a background (in this case, just filling the screen with a character)
+void renderer_set_background(const char* image_path) {
+    // In a real OS, you’d load an image here, but for simplicity, we just simulate it
+    for (int i = 0; i < SCREEN_HEIGHT; i++) {
+        for (int j = 0; j < SCREEN_WIDTH; j++) {
+            screen_buffer[i][j] = '.';
+        }
+    }
 }
 
-// Function to create a button (this is a mockup for now)
-void render_create_BUTTON(const char* label) {
-    // Assuming we have a system function that creates a button on screen
-    system_create_button(label);
+// Function to simulate creating a textbox (only stores the placeholder text)
+void* renderer_create_textbox(const char* placeholder) {
+    Textbox* textbox = (Textbox*)0x1000;  // Hardcoded address for simplicity (Replace with actual memory allocation)
+    textbox->placeholder = placeholder;
+    textbox->text = "";
+    return textbox;
 }
 
-// Function to update the screen rendering (checking for interactions, etc.)
-void render_update(void) {
-    // Assuming this function is called in the main loop to update the graphics on screen
-    system_render();
+// Function to simulate creating a button (stores the label and a "pressed" state)
+void* renderer_create_button(const char* label) {
+    Button* button = (Button*)0x2000;  // Hardcoded address for simplicity (Replace with actual memory allocation)
+    button->label = label;
+    button->pressed = 0;
+    return button;
 }
 
-// Function to render a simple text on the screen
-void render_text(const char* text) {
-    // Assuming this function draws text on the screen
-    system_draw_text(text);
+// Function to render the UI (just prints the screen buffer to the console)
+void renderer_render(void) {
+    // For simplicity, simulate drawing the screen buffer
+    for (int i = 0; i < SCREEN_HEIGHT; i++) {
+        for (int j = 0; j < SCREEN_WIDTH; j++) {
+            // Print each "pixel" or character in the screen buffer
+            // In a real OS, you'd write to the framebuffer or terminal
+            // For now, we're just "printing" to the console
+            putchar(screen_buffer[i][j]);
+        }
+        putchar('\n');
+    }
 }
 
-// Function to render a spacer (an empty area between UI elements)
-void render_spacer(void) {
-    // This might just add an empty space between UI components
-    system_add_spacer();
+// Function to simulate checking if a button was pressed (always returns 1 for simplicity)
+int renderer_button_pressed(void* button) {
+    Button* btn = (Button*)button;
+    // For now, simulate the button being pressed
+    btn->pressed = 1;
+    return btn->pressed;
 }
 
-// Utility function to load images from the system
-void* load_image(const char* path) {
-    // Load image using flexFAT or any image loading utility
-    return flex_fat(path);  // mock function to load image from flexFAT (assuming it exists)
+// Function to simulate getting the text from a textbox
+const char* renderer_get_text(void* textbox) {
+    Textbox* txtbox = (Textbox*)textbox;
+    return txtbox->text;  // In a real system, this would return user input from a keyboard
 }
