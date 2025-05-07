@@ -2,13 +2,10 @@
 #define FLEX_SYSTEM_H
 
 // System Initialization
-void system_init(void);
-void system_start(void);
 void system_halt(void);
 
 // Hardware Interfaces
 void system_init_hardware(void);
-void system_print(const char *msg);
 
 // Keyboard Driver
 void keyboard_init(void);
